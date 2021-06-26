@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.test.testcases import SerializeMixin
 from django.urls import reverse
 from django.test import TestCase
 
@@ -25,6 +24,7 @@ class PublicIngredientsApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
+
 class PrivateIngredientsAPITests(TestCase):
     """ Test the private ingredients API """
 
@@ -49,7 +49,8 @@ class PrivateIngredientsAPITests(TestCase):
         self.assertEqual(res.data, serializer.data)
 
     def test_ingredients_limited_to_user(self):
-        """ Test that only ingredients for the authenticated user are returned """
+        """ Test that only ingredients for the authenticated
+        user are returned """
         user2 = get_user_model().objects.create_user(
             'other@londonappdev.com',
             'testpass'
